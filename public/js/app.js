@@ -1,5 +1,5 @@
-//const GEMINI_API_KEY = 'AQ.Ab8RN6LUHy0vJ3lXksQxDPGhU-LqAmMYIrU7G8l4x2YBE4WZpw';
-const GEMINI_API_KEY = 'YOUR_KEY_HERE';
+const GEMINI_API_KEY = 'AQ.Ab8RN6LUHy0vJ3lXksQxDPGhU-LqAmMYIrU7G8l4x2YBE4WZpw';
+//const GEMINI_API_KEY = 'YOUR_KEY_HERE';
 
 let currentLang = '';
 let allIssues = [];
@@ -130,7 +130,7 @@ Keep it encouraging and simple.`;
 
   try {
     const res = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`,
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
