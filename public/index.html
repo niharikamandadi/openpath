@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>OpenPath — Find Your First Open Source Contribution</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo">
+      <div class="logo-dot"></div>
+      OpenPath
+    </div>
+    <div class="nav-links">
+      <a href="#">Explore</a>
+      <a href="#">How it works</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-badge">✦ Powered by GitHub API + Gemini AI</div>
+    <h1>Find your first <span class="green">open source</span> contribution</h1>
+    <p>Real issues. Real repos. AI explains exactly what to do and what you'll learn.</p>
+
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Search by topic or keyword..." />
+      <button onclick="searchIssues()">Search</button>
+    </div>
+
+    <div class="filter-row">
+      <button class="chip active" onclick="filterLang(this, '')">All</button>
+      <button class="chip" onclick="filterLang(this, 'java')">Java</button>
+      <button class="chip" onclick="filterLang(this, 'python')">Python</button>
+      <button class="chip" onclick="filterLang(this, 'javascript')">JavaScript</button>
+      <button class="chip" onclick="filterLang(this, 'cpp')">C++</button>
+      <button class="chip" onclick="filterLang(this, 'go')">Go</button>
+      <button class="chip" onclick="filterLang(this, 'typescript')">TypeScript</button>
+    </div>
+  </section>
+
+  <section class="stats-row">
+    <div class="stat-card">
+      <div class="stat-num" id="totalIssues">—</div>
+      <div class="stat-label">Live issues fetched</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" id="totalRepos">—</div>
+      <div class="stat-label">Repositories found</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">100%</div>
+      <div class="stat-label">Real GitHub data</div>
+    </div>
+  </section>
+
+  <section class="results-section">
+    <div class="section-label" id="sectionLabel">Select a language or search to find issues</div>
+    <div class="issues-grid" id="issuesGrid">
+      <div class="empty-state">
+        <div class="empty-icon">⚡</div>
+        <p>Pick a language above to see real open source issues you can contribute to</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="ai-panel" id="aiPanel" style="display:none;">
+    <div class="ai-panel-header">
+      <div class="ai-dot"></div>
+      <span id="aiPanelTitle">Gemini AI is explaining this issue...</span>
+      <button class="close-btn" onclick="closeAiPanel()">✕</button>
+    </div>
+    <div class="ai-text" id="aiText">Loading...</div>
+    <div class="ai-skills" id="aiSkills"></div>
+    <div class="ai-learn" id="aiLearn"></div>
+  </div>
+
+  <footer class="footer">
+    <p>Built with GitHub API + Gemini AI · Real data, real contributions · OpenPath 2025</p>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
