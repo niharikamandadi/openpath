@@ -1,5 +1,4 @@
 const GEMINI_API_KEY = 'AQ.Ab8RN6LCW3kTkMxDoW-MzhHyocAmuGYNPMDSQezbjbJHg5NlSQ';
-//const GEMINI_API_KEY = 'YOUR_KEY_HERE';
 
 let currentLang = '';
 let allIssues = [];
@@ -87,6 +86,12 @@ function filterLang(btn, lang) {
   btn.classList.add('active');
   currentLang = lang;
   fetchIssues(lang);
+}
+
+function filterDiff(btn, difficulty) {
+  document.querySelectorAll('.filter-row:nth-child(2) .chip').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  fetchIssues(currentLang, difficulty);
 }
 
 function searchIssues() {

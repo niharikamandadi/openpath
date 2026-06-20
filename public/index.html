@@ -12,12 +12,13 @@
 
   <nav class="navbar">
     <div class="logo">
-      <div class="logo-dot"></div>
-      OpenPath
+        <div class="logo-dot"></div>
+        OpenPath
     </div>
     <div class="nav-links">
-      <a href="#">Explore</a>
-      <a href="#">How it works</a>
+        <a href="#results">Explore</a>
+        <a href="#saves">My Saves</a>
+        <a href="#how">How it works</a>
     </div>
   </nav>
 
@@ -32,13 +33,19 @@
     </div>
 
     <div class="filter-row">
-      <button class="chip active" onclick="filterLang(this, '')">All</button>
-      <button class="chip" onclick="filterLang(this, 'java')">Java</button>
-      <button class="chip" onclick="filterLang(this, 'python')">Python</button>
-      <button class="chip" onclick="filterLang(this, 'javascript')">JavaScript</button>
-      <button class="chip" onclick="filterLang(this, 'cpp')">C++</button>
-      <button class="chip" onclick="filterLang(this, 'go')">Go</button>
-      <button class="chip" onclick="filterLang(this, 'typescript')">TypeScript</button>
+        <button class="chip active" onclick="filterLang(this, '')">All</button>
+        <button class="chip" onclick="filterLang(this, 'java')">Java</button>
+        <button class="chip" onclick="filterLang(this, 'python')">Python</button>
+        <button class="chip" onclick="filterLang(this, 'javascript')">JavaScript</button>
+        <button class="chip" onclick="filterLang(this, 'cpp')">C++</button>
+        <button class="chip" onclick="filterLang(this, 'go')">Go</button>
+        <button class="chip" onclick="filterLang(this, 'typescript')">TypeScript</button>
+    </div>
+    <div class="filter-row" style="margin-top: 10px;">
+    <span style="color:#8b949e; font-size:13px; align-self:center;">Difficulty:</span>
+    <button class="chip active" onclick="filterDiff(this, 'good first issue')">⭐ Beginner</button>
+    <button class="chip" onclick="filterDiff(this, 'help wanted')">🔥 Intermediate</button>
+    <button class="chip" onclick="filterDiff(this, 'advanced')">🚀 Advanced</button>
     </div>
   </section>
 
