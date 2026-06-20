@@ -1,4 +1,5 @@
-const GEMINI_API_KEY = 'AQ.Ab8RN6LUHy0vJ3lXksQxDPGhU-LqAmMYIrU7G8l4x2YBE4WZpw';
+//const GEMINI_API_KEY = 'AQ.Ab8RN6LUHy0vJ3lXksQxDPGhU-LqAmMYIrU7G8l4x2YBE4WZpw';
+const GEMINI_API_KEY = 'YOUR_KEY_HERE';
 
 let currentLang = '';
 let allIssues = [];
