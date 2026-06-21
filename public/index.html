@@ -12,14 +12,15 @@
 
   <nav class="navbar">
     <div class="logo">
-        <div class="logo-dot"></div>
-        OpenPath
+      <div class="logo-dot"></div>
+      OpenPath
     </div>
     <div class="nav-links">
-        <a href="#results">Explore</a>
-        <a href="#saves">My Saves</a>
-        <a href="#how">How it works</a>
+      <a href="#results">Explore</a>
+      <a href="#saves">My Saves</a>
+      <a href="#leaderboard">Leaderboard</a>
     </div>
+    <div class="nav-avatar">NH</div>
   </nav>
 
   <section class="hero">
@@ -28,24 +29,23 @@
     <p>Real issues. Real repos. AI explains exactly what to do and what you'll learn.</p>
 
     <div class="search-bar">
-      <input type="text" id="searchInput" placeholder="Search by topic or keyword..." />
+      <input type="text" id="searchInput" placeholder="Search by skill, language, or topic..." />
       <button onclick="searchIssues()">Search</button>
     </div>
 
     <div class="filter-row">
-        <button class="chip active" onclick="filterLang(this, '')">All</button>
-        <button class="chip" onclick="filterLang(this, 'java')">Java</button>
-        <button class="chip" onclick="filterLang(this, 'python')">Python</button>
-        <button class="chip" onclick="filterLang(this, 'javascript')">JavaScript</button>
-        <button class="chip" onclick="filterLang(this, 'cpp')">C++</button>
-        <button class="chip" onclick="filterLang(this, 'go')">Go</button>
-        <button class="chip" onclick="filterLang(this, 'typescript')">TypeScript</button>
+      <button class="chip active" onclick="filterLang(this, '')">All</button>
+      <button class="chip" onclick="filterLang(this, 'java')">Java</button>
+      <button class="chip" onclick="filterLang(this, 'python')">Python</button>
+      <button class="chip" onclick="filterLang(this, 'javascript')">JavaScript</button>
+      <button class="chip" onclick="filterLang(this, 'cpp')">C++</button>
+      <button class="chip" onclick="filterLang(this, 'go')">Go</button>
     </div>
-    <div class="filter-row" style="margin-top: 10px;">
-        <span style="color:#8b949e; font-size:13px; align-self:center;">Difficulty:</span>
-        <button class="chip diff-chip active" onclick="filterDiff(this, 'good first issue')">⭐ Beginner</button>
-        <button class="chip diff-chip" onclick="filterDiff(this, 'help wanted')">🔥 Intermediate</button>
-        <button class="chip diff-chip" onclick="filterDiff(this, 'advanced')">🚀 Advanced</button>
+    <div class="filter-row" style="margin-top:10px;">
+      <span style="color:#8b949e;font-size:13px;align-self:center;">Difficulty:</span>
+      <button class="chip diff-chip active" onclick="filterDiff(this, 'good first issue')">⭐ Beginner</button>
+      <button class="chip diff-chip" onclick="filterDiff(this, 'help wanted')">🔥 Intermediate</button>
+      <button class="chip diff-chip" onclick="filterDiff(this, 'advanced')">🚀 Advanced</button>
     </div>
   </section>
 
@@ -64,7 +64,7 @@
     </div>
   </section>
 
-  <section class="results-section">
+  <section class="results-section" id="results">
     <div class="section-label" id="sectionLabel">Select a language or search to find issues</div>
     <div class="issues-grid" id="issuesGrid">
       <div class="empty-state">
@@ -74,16 +74,18 @@
     </div>
   </section>
 
-  <div class="ai-panel" id="aiPanel" style="display:none;">
-    <div class="ai-panel-header">
-      <div class="ai-dot"></div>
-      <span id="aiPanelTitle">Gemini AI is explaining this issue...</span>
-      <button class="close-btn" onclick="closeAiPanel()">✕</button>
+  <section class="ai-section" id="aiSection" style="display:none;">
+    <div class="ai-section-inner">
+      <div class="ai-section-header">
+        <div class="ai-dot"></div>
+        <span id="aiPanelTitle">Gemini AI Explanation</span>
+        <button class="close-btn" onclick="closeAiPanel()">✕</button>
+      </div>
+      <div class="ai-text" id="aiText">Loading...</div>
+      <div class="ai-skills" id="aiSkills"></div>
+      <div class="ai-learn" id="aiLearn"></div>
     </div>
-    <div class="ai-text" id="aiText">Loading...</div>
-    <div class="ai-skills" id="aiSkills"></div>
-    <div class="ai-learn" id="aiLearn"></div>
-  </div>
+  </section>
 
   <footer class="footer">
     <p>Built with GitHub API + Gemini AI · Real data, real contributions · OpenPath 2025</p>

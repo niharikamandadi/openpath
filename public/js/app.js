@@ -1,5 +1,3 @@
-//const GEMINI_API_KEY = 'AQ.Ab8RN6LCW3kTkMxDoW-MzhHyocAmuGYNPMDSQezbjbJHg5NlSQ';
-
 let currentLang = '';
 let allIssues = [];
 
@@ -73,6 +71,7 @@ function renderIssues(issues) {
         <div class="stars">⭐ ${issue.reactions?.['+1'] || 0} · 💬 ${issue.comments}</div>
         <div style="display:flex; gap:8px;">
           <a href="${issue.html_url}" target="_blank" class="ai-btn" style="text-decoration:none;">View on GitHub</a>
+          <button class="ai-btn" onclick="saveIssue(${index})" id="save-${index}">🔖 Save</button>
           <button class="ai-btn" onclick="explainIssue(${index})">✦ Explain</button>
         </div>
       </div>
@@ -105,7 +104,7 @@ document.getElementById('searchInput').addEventListener('keypress', function(e) 
 
 async function explainIssue(index) {
   const issue = allIssues[index];
-  const panel = document.getElementById('aiPanel');
+  const panel = document.getElementById('aiSection');
   const aiText = document.getElementById('aiText');
   const aiSkills = document.getElementById('aiSkills');
   const aiLearn = document.getElementById('aiLearn');
@@ -172,5 +171,70 @@ Keep it encouraging and simple.`;
 }
 
 function closeAiPanel() {
-  document.getElementById('aiPanel').style.display = 'none';
+  document.getElementById('aiSection').style.display = 'none';
+}
+
+function saveIssue(index) {
+  const issue = allIssues[index];
+  let saved = JSON.parse(localStorage.getItem('savedIssues') || '[]');
+  const already = saved.find(i => i.id === issue.id);
+  if (already) {
+    alert('Already saved!');
+    return;
+  }
+  saved.push({
+    id: issue.id,
+    title: issue.title,
+    repo: issue.repository_url.replace('https://api.github.com/repos/', ''),
+    url: issue.html_url,
+    labels: issue.labels.map(l => l.name)
+  });
+  localStorage.setItem('savedIssues', JSON.stringify(saved));
+  document.getElementById(`save-${index}`).textContent = '✅ Saved';
+}
+
+document.querySelector('a[href="#saves"]').addEventListener('click', function(e) {
+  e.preventDefault();
+  showSaves();
+});
+
+function showSaves() {
+  const saved = JSON.parse(localStorage.getItem('savedIssues') || '[]');
+  const grid = document.getElementById('issuesGrid');
+  const label = document.getElementById('sectionLabel');
+
+  if (saved.length === 0) {
+    grid.innerHTML = '<div class="empty-state"><div class="empty-icon">🔖</div><p>No saved issues yet. Click Save on any issue card!</p></div>';
+    label.textContent = 'MY SAVED ISSUES';
+    document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+    return;
+  }
+
+  label.textContent = `MY SAVED ISSUES · ${saved.length} issues`;
+  grid.innerHTML = saved.map(issue => `
+    <div class="issue-card">
+      <div class="card-top">
+        <div class="repo-avatar">${issue.repo.split('/')[0].substring(0,2).toUpperCase()}</div>
+        <div class="repo-name">${issue.repo}</div>
+      </div>
+      <div class="card-title">${issue.title}</div>
+      <div class="card-tags">
+        ${issue.labels.map(l => `<span class="tag green">${l}</span>`).join('')}
+      </div>
+      <div class="card-footer">
+        <div class="stars">🔖 Saved</div>
+        <a href="${issue.url}" target="_blank" class="ai-btn" style="text-decoration:none;">View on GitHub</a>
+        <button class="ai-btn" onclick="unsaveIssue(${issue.id})" style="color:#ff7b72;">🗑 Remove</button>
+      </div>
+    </div>
+  `).join('');
+
+  document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+}
+
+function unsaveIssue(id) {
+  let saved = JSON.parse(localStorage.getItem('savedIssues') || '[]');
+  saved = saved.filter(i => i.id !== id);
+  localStorage.setItem('savedIssues', JSON.stringify(saved));
+  showSaves();
 }

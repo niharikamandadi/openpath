@@ -9,7 +9,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.post('/api/explain', async (req, res) => {
   const { prompt } = req.body;
   console.log('Explain request received');
-  const GEMINI_API_KEY = 'AQ.Ab8RN6KRE0HJ_blG5yJTtdsQKcy8_3CmRDpQQJCC0ZBE35VVBw';
+  const GEMINI_API_KEY = 'AQ.Ab8RN6LREyz1DI2zPg0nkwTcUKjsnE08tvpCr6j3mEMCBBkg1g';
   
   try {
     const response = await fetch(
