@@ -8,7 +8,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.post('/api/explain', async (req, res) => {
   const { prompt } = req.body;
-  const GEMINI_API_KEY = 'AQ.Ab8RN6K_wUMYUwzChSxvcn0cqGtJEzr_z4hsGxHDNdkM72XIIg';
+  console.log('Explain request received');
+  const GEMINI_API_KEY = 'AQ.Ab8RN6KRE0HJ_blG5yJTtdsQKcy8_3CmRDpQQJCC0ZBE35VVBw';
   
   try {
     const response = await fetch(
@@ -20,6 +21,7 @@ app.post('/api/explain', async (req, res) => {
       }
     );
     const data = await response.json();
+    console.log('Gemini raw response:', JSON.stringify(data));
     res.json(data);
   } catch (err) {
     res.status(500).json({ error: err.message });
