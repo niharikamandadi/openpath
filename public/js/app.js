@@ -1,4 +1,4 @@
-const GEMINI_API_KEY = 'AQ.Ab8RN6LCW3kTkMxDoW-MzhHyocAmuGYNPMDSQezbjbJHg5NlSQ';
+//const GEMINI_API_KEY = 'AQ.Ab8RN6LCW3kTkMxDoW-MzhHyocAmuGYNPMDSQezbjbJHg5NlSQ';
 
 let currentLang = '';
 let allIssues = [];
@@ -89,7 +89,7 @@ function filterLang(btn, lang) {
 }
 
 function filterDiff(btn, difficulty) {
-  document.querySelectorAll('.filter-row:nth-child(2) .chip').forEach(c => c.classList.remove('active'));
+  document.querySelectorAll('.diff-chip').forEach(c => c.classList.remove('active'));
   btn.classList.add('active');
   fetchIssues(currentLang, difficulty);
 }
@@ -134,18 +134,14 @@ Then on a new line write: LEARN: followed by one sentence on what they'll gain.
 Keep it encouraging and simple.`;
 
   try {
-    const res = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents: [{ parts: [{ text: prompt }] }]
-        })
-      }
-    );
+    const res = await fetch('/api/explain', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ prompt })
+    });
 
     const data = await res.json();
+    console.log('Gemini response:', data);
     const response = data.candidates?.[0]?.content?.parts?.[0]?.text || 'Could not get explanation.';
 
     const lines = response.split('\n').filter(l => l.trim());
@@ -170,8 +166,9 @@ Keep it encouraging and simple.`;
     aiLearn.textContent = learn ? `💡 ${learn}` : '';
 
   } catch (err) {
-    aiText.textContent = 'Could not load AI explanation. Check your Gemini API key.';
-  }
+      aiText.textContent = 'Error: ' + err.message;
+      console.error('Gemini error:', err);
+    }
 }
 
 function closeAiPanel() {
